@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container mt-5">
         <div class="jumbotron">
-            <h1 class="display-4">Welcome!</h1>
+            <h1 class="display-4">Willkommen im WTL!</h1>
             <p class="lead">Willkommen zum Einstufung Test.</p>
             <hr class="my-4">
             <p>Starten Sie den Test indem Sie unten Ihren Namen ausfüllen und auf den Button klicken.</p>

@@ -37,34 +37,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="container mt-5">
         <h1>Add Question</h1>
         <?php if (isset($_GET['success'])): ?>
-            <div class="alert alert-success">Question added successfully!</div>
+            <div class="alert alert-success">Frage wurde hinzugefügt!</div>
         <?php endif; ?>
         <form action="admin.php" method="post">
             <div class="form-group">
-                <label for="question">Question</label>
+                <label for="question">Frage</label>
                 <textarea class="form-control" id="question" name="question" required></textarea>
             </div>
             <div class="form-group">
-                <label for="answer1">Answer 1</label>
+                <label for="answer1">Antwort 1</label>
                 <input type="text" class="form-control" id="answer1" name="answers[]" required>
                 <input type="radio" name="correct_answer" value="0" required> Correct
             </div>
             <div class="form-group">
-                <label for="answer2">Answer 2</label>
+                <label for="answer2">Antwort 2</label>
                 <input type="text" class="form-control" id="answer2" name="answers[]" required>
                 <input type="radio" name="correct_answer" value="1" required> Correct
             </div>
             <div class="form-group">
-                <label for="answer3">Answer 3</label>
+                <label for="answer3">Antwort 3</label>
                 <input type="text" class="form-control" id="answer3" name="answers[]" required>
                 <input type="radio" name="correct_answer" value="2" required> Correct
             </div>
             <div class="form-group">
-                <label for="answer4">Answer 4</label>
+                <label for="answer4">Antwort 4</label>
                 <input type="text" class="form-control" id="answer4" name="answers[]" required>
-                <input type="radio" name="correct_answer" value="3" required> Correct
+                <input type="radio" name="correct_answer" value="3" required> Richtig
             </div>
-            <button type="submit" class="btn btn-primary">Save Question</button>
+            <button type="submit" class="btn btn-primary">Frage speichern</button>
         </form>
     </div>
 </body>

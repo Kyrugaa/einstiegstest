@@ -35,7 +35,7 @@ $questions = $conn->query("SELECT * FROM questions");
                     <?php endwhile; ?>
                 </div>
             <?php endwhile; ?>
-            <button type="submit" class="btn btn-primary">Submit Quiz</button>
+            <button type="submit" class="btn btn-primary">Test abgeben</button>
         </form>
     </div>
 </body>
