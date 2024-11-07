@@ -47,17 +47,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="form-group">
                 <label for="answer1">Antwort 1</label>
                 <input type="text" class="form-control" id="answer1" name="answers[]" required>
-                <input type="radio" name="correct_answer" value="0" required> Correct
+                <input type="radio" name="correct_answer" value="0" required> Richtig
             </div>
             <div class="form-group">
                 <label for="answer2">Antwort 2</label>
                 <input type="text" class="form-control" id="answer2" name="answers[]" required>
-                <input type="radio" name="correct_answer" value="1" required> Correct
+                <input type="radio" name="correct_answer" value="1" required> Richtig
             </div>
             <div class="form-group">
                 <label for="answer3">Antwort 3</label>
                 <input type="text" class="form-control" id="answer3" name="answers[]" required>
-                <input type="radio" name="correct_answer" value="2" required> Correct
+                <input type="radio" name="correct_answer" value="2" required> Richtig
             </div>
             <div class="form-group">
                 <label for="answer4">Antwort 4</label>
