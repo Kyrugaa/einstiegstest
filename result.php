@@ -4,9 +4,8 @@ if (!isset($_SESSION['firstName']) || !isset($_SESSION['lastName'])) {
     header("Location: index.php");
     exit();
 }
-
 $score = isset($_SESSION['score']) ? $_SESSION['score'] : 0;
-$total_questions = isset($_SESSION['total']) ? $_SESSION['total'] : 0;
+$total_questions = isset($_SESSION['total_questions']) ? $_SESSION['total_questions'] : 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
