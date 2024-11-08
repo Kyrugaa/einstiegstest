@@ -1,24 +1,20 @@
 <?php
-// Start the session
+
 session_start();
 
-// Check if the form is submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the first and last name from the form
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
     $datum = date("Y-m-d");
 
-    // Store the first and last name in session variables
     $_SESSION['firstName'] = $firstName;
     $_SESSION['lastName'] = $lastName;
     $_SESSION['datum'] = $datum;
 
-    // Redirect to the test page or any other page
     header("Location: start_test.php");
     exit();
 } else {
-    // Define $datum for the form
     $datum = date("Y-m-d");
 }
 ?>
@@ -29,7 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome Page</title>
-    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -53,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
         </div>
     </div>
-    <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

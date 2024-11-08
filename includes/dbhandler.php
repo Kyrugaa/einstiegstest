@@ -38,7 +38,6 @@ function safeTeilnehmer($datum, $firstName, $lastName, $score) {
 
 function checkIfCorrect($answer_id) {
     try{
-        // Check if the selected answer is correct
         $conn = getConnection();
         $stmt = $conn->prepare("SELECT is_correct FROM answers WHERE id = ?");
         $stmt->bind_param("i", $answer_id);

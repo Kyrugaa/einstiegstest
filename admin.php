@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Add Question</h1>
+        <h1>Frage hinzufügen</h1>
         <?php if (isset($_GET['success'])): ?>
             <div class="alert alert-success">Frage wurde hinzugefügt!</div>
         <?php endif; ?>
