@@ -81,3 +81,63 @@ function updateScore($firstName, $lastName, $score) {
         close_connection($conn);
     }
 }
+
+
+function saveQuestionWithAnswers($question, $answers, $correct_answer) {
+    try {
+        $conn = getConnection();
+        $stmt = $conn->prepare("INSERT INTO questions (question) VALUES (?)");
+        $stmt->bind_param("s", $question);
+        $stmt->execute();
+        $question_id = $stmt->insert_id;
+
+        foreach ($answers as $index => $answer) {
+            $is_correct = ($index == $correct_answer) ? 1 : 0;
+            $stmt = $conn->prepare("INSERT INTO answers (question_id, answer, is_correct) VALUES (?, ?, ?)");
+            $stmt->bind_param("isi", $question_id, $answer, $is_correct);
+            $stmt->execute();
+        }
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    } finally {
+        close_connection($conn);
+    }
+}
+
+
+function getQuestions() {
+    $questions = [];
+    try {
+        $conn = getConnection();
+        $result = $conn->query("SELECT * FROM questions");
+        while ($row = $result->fetch_assoc()) {
+            $questions[] = $row;
+        }
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    } finally {
+        close_connection($conn);
+    }
+    return $questions;
+}
+
+
+function getAnswersByQuestionId($question_id) {
+    $answers = [];
+    try {
+        $conn = getConnection();
+        $stmt = $conn->prepare("SELECT * FROM answers WHERE question_id = ?");
+        $stmt->bind_param("i", $question_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc()) {
+            $answers[] = $row;
+        }
+        $stmt->close();
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    } finally {
+        close_connection($conn);
+    }
+    return $answers;
+}

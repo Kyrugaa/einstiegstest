@@ -20,7 +20,7 @@ $total_questions = isset($_GET['total']) ? $_GET['total'] : 0;
     <div class="container mt-5">
         <h1>Quiz Resultat</h1>
         <p>Hallo <?php echo htmlspecialchars($_SESSION['firstName']) . ' ' . htmlspecialchars($_SESSION['lastName']); ?>,</p>
-        <p>Dein Score ist: <?php echo htmlspecialchars($score) . ' out of ' . htmlspecialchars($total_questions); ?></p>
+        <p>Dein Score ist: <?php echo htmlspecialchars($score) . ' von ' . htmlspecialchars($total_questions); ?></p>
         <a href="index.php" class="btn btn-primary">Zurück zur Startseite</a>
     </div>
 </body>

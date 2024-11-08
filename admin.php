@@ -7,20 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $answers = $_POST['answers'];
     $correct_answer = $_POST['correct_answer'];
 
-    $conn = getConnection();
-    $stmt = $conn->prepare("INSERT INTO questions (question) VALUES (?)");
-    $stmt->bind_param("s", $question);
-    $stmt->execute();
-    $question_id = $stmt->insert_id;
+    saveQuestionWithAnswers($question, $answers, $correct_answer);
 
-    foreach ($answers as $index => $answer) {
-        $is_correct = ($index == $correct_answer) ? 1 : 0;
-        $stmt = $conn->prepare("INSERT INTO answers (question_id, answer, is_correct) VALUES (?, ?, ?)");
-        $stmt->bind_param("isi", $question_id, $answer, $is_correct);
-        $stmt->execute();
-    }
-
-    close_connection($conn);
     header("Location: admin.php?success=1");
     exit();
 }

@@ -6,8 +6,7 @@ if(!isset($_SESSION['firstName']) || !isset($_SESSION['lastName'])) {
 }
 require_once 'includes/dbhandler.php';
 
-$conn = getConnection();
-$questions = $conn->query("SELECT * FROM questions");
+$questions = getQuestions();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,23 +20,22 @@ $questions = $conn->query("SELECT * FROM questions");
     <div class="container mt-5">
         <h1>Hello <?php echo htmlspecialchars($_SESSION['firstName']) . ' ' . htmlspecialchars($_SESSION['lastName']); ?></h1>
         <form action="includes/submit_quiz.php" method="post">
-            <?php while ($question = $questions->fetch_assoc()): ?>
+        <?php foreach ($questions as $question): ?>
                 <div class="form-group">
                     <label><?php echo htmlspecialchars($question['question']); ?></label>
                     <?php
                     $question_id = $question['id'];
-                    $answers = $conn->query("SELECT * FROM answers WHERE question_id = $question_id");
-                    while ($answer = $answers->fetch_assoc()): ?>
+                    $answers = getAnswersByQuestionId($question_id);
+                    foreach ($answers as $answer): ?>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="question_<?php echo $question_id; ?>" value="<?php echo $answer['id']; ?>" required>
                             <label class="form-check-label"><?php echo htmlspecialchars($answer['answer']); ?></label>
                         </div>
-                    <?php endwhile; ?>
+                    <?php endforeach; ?>
                 </div>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
             <button type="submit" class="btn btn-primary">Test abgeben</button>
         </form>
     </div>
 </body>
 </html>
-<?php close_connection($conn); ?>

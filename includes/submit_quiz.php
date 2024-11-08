@@ -3,7 +3,6 @@ session_start();
 require_once 'dbhandler.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $conn = getConnection();
     $score = 0;
 
     $total_questions = getTotal();
@@ -27,4 +26,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header("Location: ../result.php?score=$score&total=$total_questions");
     exit();
 }
-?>
