@@ -23,6 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $lastName = $_SESSION['lastName'];
     updateScore($firstName, $lastName, $score);
 
-    header("Location: ../result.php?score=$score&total=$total_questions");
+    $_SESSION['score'] = $score;
+    $_SESSION['total_questions'] = $total_questions;
+
+    header("Location: ../result.php");
     exit();
 }

@@ -5,8 +5,8 @@ if (!isset($_SESSION['firstName']) || !isset($_SESSION['lastName'])) {
     exit();
 }
 
-$score = isset($_GET['score']) ? $_GET['score'] : 0;
-$total_questions = isset($_GET['total']) ? $_GET['total'] : 0;
+$score = isset($_SESSION['score']) ? $_SESSION['score'] : 0;
+$total_questions = isset($_SESSION['total']) ? $_SESSION['total'] : 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">

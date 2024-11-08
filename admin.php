@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="form-group">
                 <label for="answer1">Antwort 1</label>
-                <input type="text" class="form-control" id="answer1" name="answers[]" required>
+                <input type="text" class="form-control" id="answer1" name="answers[]" required> <!-- name Attribut wird als Array betrachtet wegen den [] -->
                 <input type="radio" name="correct_answer" value="0" required> Richtig
             </div>
             <div class="form-group">
@@ -52,8 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="text" class="form-control" id="answer4" name="answers[]" required>
                 <input type="radio" name="correct_answer" value="3" required> Richtig
             </div>
-            <button type="submit" class="btn btn-primary">Frage speichern</button>
+            <button type="submit" class="btn btn-success">Frage speichern</button>
         </form>
+        <a href="edit.php" class="btn btn-primary" style="margin-top: 3em;">Fragen bearbeiten/löschen</a>
     </div>
 </body>
 </html>
