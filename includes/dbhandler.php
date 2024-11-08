@@ -126,7 +126,7 @@ function getAnswersByQuestionId($question_id) {
     $answers = [];
     try {
         $conn = getConnection();
-        $stmt = $conn->prepare("SELECT * FROM answers WHERE question_id = ?");
+        $stmt = $conn->prepare("SELECT id, answer, is_correct FROM answers WHERE question_id = ?");
         $stmt->bind_param("i", $question_id);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -140,4 +140,72 @@ function getAnswersByQuestionId($question_id) {
         close_connection($conn);
     }
     return $answers;
+}
+
+
+function updateQuestionWithAnswers($question_id, $question, $answers, $correct_answer) {
+    try {
+        $conn = getConnection();
+        $stmt = $conn->prepare("UPDATE questions SET question = ? WHERE id = ?");
+        $stmt->bind_param("si", $question, $question_id);
+        $stmt->execute();
+
+        // Fetch existing answers to get their IDs
+        $existing_answers = getAnswersByQuestionId($question_id);
+
+        foreach ($answers as $index => $answer) {
+            $is_correct = ($index == $correct_answer) ? 1 : 0;
+            $answer_id = $existing_answers[$index]['id'];
+            $stmt = $conn->prepare("UPDATE answers SET answer = ?, is_correct = ? WHERE id = ?");
+            $stmt->bind_param("sii", $answer, $is_correct, $answer_id);
+            $stmt->execute();
+        }
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    } finally {
+        close_connection($conn);
+    }
+}
+
+function getQuestionById($question_id) {
+    $question = null;
+    try {
+        $conn = getConnection();
+        $stmt = $conn->prepare("SELECT * FROM questions WHERE id = ?");
+        $stmt->bind_param("i", $question_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $question = $result->fetch_assoc();
+        }
+        $stmt->close();
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    } finally {
+        close_connection($conn);
+    }
+    return $question;
+}
+
+
+function deleteQuestion($question_id) {
+    try {
+        $conn = getConnection();
+
+        // Antworte zuerst löschen
+        $stmt = $conn->prepare("DELETE FROM answers WHERE question_id = ?");
+        $stmt->bind_param("i", $question_id);
+        $stmt->execute();
+        $stmt->close();
+
+        // Frage löschen
+        $stmt = $conn->prepare("DELETE FROM questions WHERE id = ?");
+        $stmt->bind_param("i", $question_id);
+        $stmt->execute();
+        $stmt->close();
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    } finally {
+        close_connection($conn);
+    }
 }

@@ -23,13 +23,17 @@ $questions = getQuestions();
                     <th>Aktionen</th>
                 </tr>
             </thead>
+            <a href="add_question.php" class="btn btn-primary" style="margin-bottom: 1em; margin-top: 2em;">Fragen hinzufügen</a>
             <tbody>
                 <?php foreach ($questions as $question): ?>
                     <tr>
                         <td><?php echo htmlspecialchars($question['question']); ?></td>
                         <td>
                             <a href="edit_question.php?id=<?php echo $question['id']; ?>" class="btn btn-secondary">Bearbeiten</a>
-                            <a href="delete_question.php?id=<?php echo $question['id']; ?>" class="btn btn-danger" onclick="return confirm('Sind Sie sicher, dass Sie diese Frage löschen möchten?');">Löschen</a>
+                            <form action="includes/delete_question.php" method="POST" style="display:inline;">
+                                <input type="hidden" name="question_id" value="<?php echo $question['id']; ?>">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Sind Sie sicher, dass Sie diese Frage löschen möchten?');">Löschen</button>
+                            </form>                        
                         </td>
                     </tr>
                 <?php endforeach; ?>
